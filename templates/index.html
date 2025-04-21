@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        label {
+            font-size: 12px;
+            color: #555;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        h3 {
+            color: #333;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Rainfall Prediction Form</h2>
+        <form action="/predict" method="post">
+            {% for feature in [
+                'MinTemp', 'MaxTemp', 'Rainfall', 'Evaporation', 'Sunshine',
+                'WindGustSpeed', 'WindSpeed9am', 'WindSpeed3pm',
+                'Humidity9am', 'Humidity3pm', 'Pressure9am', 'Pressure3pm',
+                'Temp9am', 'Temp3pm', 'Cloud9am', 'Cloud3pm'
+            ] %}
+                <label>{{ feature }}</label>
+                <input type="text" name="{{ feature }}" required><br><br>
+            {% endfor %}
+            <input type="submit" value="Predict">
+        </form>
+
+        <h3>{{ prediction_text }}</h3>
+    </div>
+</body>
+</html>
